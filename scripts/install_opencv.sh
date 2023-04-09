@@ -1,6 +1,7 @@
 #!/bin/bash
 # Opencv installation script for linux
 # Made by: @MilkFlavor with ❤️ on GitHub
+# Check out: https://github.com/MilkFlavor
 
 # Check type of linux distribution
 if [[ -f /etc/os-release ]]; then
