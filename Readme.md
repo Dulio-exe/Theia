@@ -50,8 +50,7 @@ You can [download](https://github.com/MilkFlavor/Theia/releases/download/0.5/the
 
 MIT
 
----
-> GitHub [@MilkFlavor](https://github.com/MilkFlavor) &nbsp;&middot;&nbsp;
+> GitHub [@MilkFlavor](https://github.com/MilkFlavor)
 
 ## Final Message
 
