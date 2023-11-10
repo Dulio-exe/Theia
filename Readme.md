@@ -52,3 +52,7 @@ MIT
 
 ---
 > GitHub [@amitmerchant1990](https://github.com/MilkFlavor) &nbsp;&middot;&nbsp;
+
+## Final Message
+
+For anyone who is just passing by, this was a pretty fun and challenging project. I hope you have a fun time exploring it. :) - From Shib
