@@ -1,7 +1,7 @@
 
 <h1 align="center">
   <br>
-  <a href="https://github.com/MilkFlavor/Theia"><img src="https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.png" alt="Theia" width="200"></a>
+  <a href="https://github.com/MilkFlavor/Theia"><img src="https://raw.githubusercontent.com/MilkFlavor/Theia/main/assets/logo.png" alt="Theia" width="200"></a>
   <br>
   Theia
   <br>
@@ -16,7 +16,7 @@
   <a href="#license">License</a>
 </p>
 
-![screenshot](https://raw.githubusercontent.com/MilkFlavor/Theia/main/example.png)
+![screenshot](https://raw.githubusercontent.com/MilkFlavor/Theia/main/assets/example.png)
 
 ## Key Features
 
