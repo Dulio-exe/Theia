@@ -64,6 +64,37 @@ if [ "$(uname)" != "Linux" ]; then
     exit 1
 fi
 
+# Check type of linux distribution
+if [[ -f /etc/os-release ]]; then
+    # shellcheck source=/dev/null
+    source /etc/os-release
+    OS=$NAME
+    VER=$VERSION_ID
+elif type lsb_release >/dev/null 2>&1; then
+    OS=$(lsb_release -si)
+    VER=$(lsb_release -sr)
+elif [[ -f /etc/lsb-release ]]; then
+    # shellcheck source=/dev/null
+    source /etc/lsb-release
+    OS=$DISTRIB_ID
+    VER=$DISTRIB_RELEASE
+elif [[ -f /etc/debian_version ]]; then
+    OS=Debian
+    VER=$(cat /etc/debian_version)
+elif [[ -f /etc/SuSe-release ]]; then
+    OS=SuSe
+elif [[ -f /etc/redhat-release ]]; then
+    OS=RedHat
+else
+    OS=$(uname -s)
+    VER=$(uname -r)
+fi
+
+INSTALL="sudo apt-get install -y"
+if [[ "$OS" == "Arch Linux" ]]; then
+    INSTALL="sudo pacman -S --asdeps"
+fi
+
 ############################################
 ###### Check and install dependencies ######
 ############################################
@@ -81,7 +112,7 @@ if ! command -v cmake &> /dev/null; then
     echo "CMake could not be found ❌"
     # Install cmake
     echo "Installing dependancy (cmake)"
-    sudo apt-get install -y cmake
+    ${INSTALL} cmake
     echo "Dependency (cmake) installed ✅"
 else
     echo "CMake is installed ✅"
@@ -92,7 +123,7 @@ if ! command -v make &> /dev/null; then
     echo "Make could not be found ❌"
     # Install make
     echo "Installing dependancy (make)"
-    sudo apt-get install -y make
+    ${INSTALL} make
     echo "Dependency (make) installed ✅"
 else
     echo "CMake is installed ✅"
@@ -103,17 +134,28 @@ if ! command -v g++ &> /dev/null; then
     echo "G++ could not be found ❌"
     # Install g++
     echo "Installing dependancy (g++)"
-    sudo apt-get install -y g++
+
+    case "$OS" in
+    "Arch Linux")
+        ${INSTALL} gcc;;
+    *)
+        ${INSTALL} g++;;
+    esac
     echo "Dependency (g++) installed ✅"
 else
     echo "G++ is installed ✅"
 fi
 
 # Check if opencv is inside /usr/local/include
-if ! find /usr/{,local/}include/ -maxdepth 1 -name 'opencv4'; then
+if [ ! -d "/usr/include/opencv4" ] && [ ! -d "/usr/local/include/opencv4" ]; then
     echo "OpenCV could not be found ❌"
-    echo "Please use the install_opencv script to build OpenCV 🛠️"
-    exit 1
+    case "$OS" in
+    "Arch Linux")
+        ${INSTALL} opencv vtk;;
+    *)
+        echo "Please use the install_opencv script to build OpenCV 🛠️"
+        exit 1;;
+    esac
 else
     echo "OpenCV is installed ✅"
 fi
