@@ -80,7 +80,7 @@ fi
 if ! command -v cmake &> /dev/null; then
     echo "CMake could not be found ❌"
     # Install cmake
-    echo "Installing dependancy"
+    echo "Installing dependancy (cmake)"
     sudo apt-get install -y cmake
     echo "Dependency (cmake) installed ✅"
 else
@@ -90,27 +90,27 @@ fi
 # Check if make is installed
 if ! command -v make &> /dev/null; then
     echo "Make could not be found ❌"
-    exit 1
-else
     # Install make
-    echo "Installing dependancy"
+    echo "Installing dependancy (make)"
     sudo apt-get install -y make
     echo "Dependency (make) installed ✅"
+else
+    echo "CMake is installed ✅"
 fi
 
-# Check if g++ is installed 
+# Check if g++ is installed
 if ! command -v g++ &> /dev/null; then
     echo "G++ could not be found ❌"
-    exit 1
-else
     # Install g++
-    echo "Installing dependancy"
+    echo "Installing dependancy (g++)"
     sudo apt-get install -y g++
-    echo "Dependency (g++) installed"
+    echo "Dependency (g++) installed ✅"
+else
+    echo "G++ is installed ✅"
 fi
 
 # Check if opencv is inside /usr/local/include
-if [ ! -d "/usr/local/include/opencv4" ]; then
+if ! find /usr/{,local/}include/ -maxdepth 1 -name 'opencv4'; then
     echo "OpenCV could not be found ❌"
     echo "Please use the install_opencv script to build OpenCV 🛠️"
     exit 1
