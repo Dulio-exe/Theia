@@ -2,6 +2,8 @@
 // Made by: @MilkFlavor with ❤️ on GitHub
 // Check out: https://github.com/MilkFlavor
 
+
+#include <filesystem>
 #include <blur.hpp>
 #include <iostream>
 #include <log.hpp>
@@ -27,6 +29,13 @@ int main(int argc, char argv[]) {
 // Path to input and output directories
 string input_dir = "./input/";
 string outputDir = "./output/";
+
+
+// Create folders, nothing happens if they already exist
+// v would crash the application otherwise
+std::filesystem::create_directories(input_dir);
+// v would silently fail otherwise
+std::filesystem::create_directories(outputDir);
 
 // Set image processing filter values
 int blur_amount = 2;
